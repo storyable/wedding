@@ -852,8 +852,10 @@ $('#navApps2').addEventListener('click', e => { const el = e.target.closest('[da
       if (r.code !== 'Ok' || !r.routes?.length) throw new Error(r.code);
       const rt = r.routes[0];
       draw(rt.geometry.coordinates.map(([lng, lat]) => [lat, lng]));
-      $('#routeSum').innerHTML = '<b>' + fmtTime(rt.duration) + '</b><span>' + (mode === 'car' ? '자동차' : '도보') + ' · ' + fmtDist(rt.distance) + '</span>';
-      $('#routeHint').textContent = mode === 'car' ? '막히지 않을 때 기준이에요. 실제 길안내는 아래 내비게이션으로 시작하세요.' : '걸어서 가는 경로예요. 대중교통은 아래 네이버지도에서 확인하세요.';
+      $('#routeSum').innerHTML = mode === 'car'
+        ? '<b>' + fmtDist(rt.distance) + '</b><span>자동차 · 막히지 않으면 약 ' + fmtTime(rt.duration) + '</span>'
+        : '<b>' + fmtTime(rt.duration) + '</b><span>도보 · ' + fmtDist(rt.distance) + '</span>';
+      $('#routeHint').textContent = mode === 'car' ? '예식 당일 교통 상황에 따라 더 걸릴 수 있어요. 길안내는 아래 내비게이션으로 시작하세요.' : '걸어서 가는 경로예요. 대중교통은 아래 네이버지도에서 확인하세요.';
       note('');
     } catch {
       draw([me, H]);
