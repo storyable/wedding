@@ -851,7 +851,7 @@ $('#navApps2').addEventListener('click', e => { const el = e.target.closest('[da
   }
   async function route() {
     $('#routeBox').hidden = false;
-    $('.modes button').forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === mode));
+    $$('.modes button').forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === mode));
     $('#transitLinks').hidden = mode !== 'transit';
     if (mode === 'transit') return transit();
     $('#routeSum').innerHTML = '<span>경로를 찾는 중…</span>';
