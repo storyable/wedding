@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//junkyu-hyojung//wedding//KO
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20270320-junkyu-hyojung@storyable.github.io
+DTSTAMP:20261018T000000Z
+DTSTART:20270320T030000Z
+DTEND:20270320T050000Z
+SUMMARY:장준규 ♥ 임효정 결혼식
+LOCATION:호텔나루 서울 엠갤러리\, 서울 마포구 마포대로 8
+URL:https://storyable.github.io/wedding/
+DESCRIPTION:모바일 청첩장: https://storyable.github.io/wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:내일 낮 12시 준규 ♥ 효정 결혼식
+END:VALARM
+END:VEVENT
+END:VCALENDAR

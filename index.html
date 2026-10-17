@@ -157,6 +157,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .route-box{margin-top:12px;background:var(--tint);border-radius:10px;padding:14px 16px;text-align:left;display:grid;gap:10px}
 .modes{display:flex;gap:6px}
 .modes button{flex:1;border:1px solid var(--line);background:var(--paper);border-radius:8px;min-height:40px;font-size:.86em}
+.btn .ic{width:14px;height:14px;border-radius:4px;display:inline-block}
 .modes button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .route-sum{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .route-sum b{font-family:var(--latin);font-weight:400;font-size:1.7em;line-height:1}
@@ -336,7 +337,7 @@ footer{text-align:center;color:var(--muted);font-size:.8em;padding-top:56px}
     <p class="dday" id="ddayText"></p>
     <div class="row" style="margin-top:24px">
       <a class="btn" id="gcal" target="_blank" rel="noopener">구글 캘린더에 추가</a>
-      <button class="btn" id="icsBtn">휴대폰 캘린더에 추가</button>
+      <a class="btn" id="icsBtn" href="wedding.ics">휴대폰 캘린더에 추가</a>
     </div>
   </section>
 
@@ -387,8 +388,9 @@ footer{text-align:center;color:var(--muted);font-size:.8em;padding-top:56px}
       <button class="btn" id="sketchBtn">약도 보기</button>
     </div>
     <div class="route-box" id="routeBox" hidden>
-      <div class="modes" role="group" aria-label="이동 방법"><button data-mode="car" aria-pressed="true">자동차</button><button data-mode="foot" aria-pressed="false">도보</button></div>
+      <div class="modes" role="group" aria-label="이동 방법"><button data-mode="car" aria-pressed="true">자동차</button><button data-mode="transit" aria-pressed="false">대중교통</button><button data-mode="foot" aria-pressed="false">도보</button></div>
       <div class="route-sum" id="routeSum"></div>
+      <div class="row" id="transitLinks" hidden style="justify-content:stretch"><a class="btn" id="trNaver" style="flex:1"><i class="ic" style="background:#03C75A"></i>네이버지도로 보기</a><a class="btn" id="trKakao" target="_blank" rel="noopener" style="flex:1"><i class="ic" style="background:#FFCD00"></i>카카오맵으로 보기</a></div>
       <p class="muted small" id="routeHint">시간은 막히지 않을 때 기준이에요. 실제 길안내는 아래 내비게이션으로 시작하세요.</p>
     </div>
     <p id="mapNote" role="status"></p>
@@ -690,13 +692,8 @@ tick(); setInterval(tick, 1000);
 const title = '장준규 ♥ 임효정 결혼식';
 $('#gcal').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(title)
   + '&dates=20270320T030000Z/20270320T050000Z&location=' + encodeURIComponent(CONFIG.venue + ', ' + CONFIG.address) + '&details=' + encodeURIComponent(pageUrl());
-$('#icsBtn').onclick = () => {
-  const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//junkyu-hyojung//KO', 'BEGIN:VEVENT', 'UID:20270320-junkyu-hyojung', 'DTSTAMP:20261018T000000Z',
-    'DTSTART:20270320T030000Z', 'DTEND:20270320T050000Z', 'SUMMARY:' + title, 'LOCATION:' + CONFIG.venue + '\\, ' + CONFIG.address,
-    'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:' + title, 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
-  const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })), download: 'wedding.ics' });
-  document.body.appendChild(a); a.click(); a.remove(); toast('캘린더 파일을 열면 일정이 추가돼요');
-};
+// 아이폰: 서버에 올린 wedding.ics 를 열면 '캘린더에 추가' 화면이 떠요. 안드로이드: 구글 캘린더로 바로.
+if (/android/i.test(navigator.userAgent)) { $('#icsBtn').href = $('#gcal').href; $('#icsBtn').target = '_blank'; }
 
 // 사진 (자리표시: 강물빛 그라데이션)
 const washes = [['#9DB2B9', '#DCE3E1'], ['#C9A9A4', '#EEE5E1'], ['#8FA597', '#DAE1DA'], ['#B3BEC3', '#EDF0EE'], ['#BFA59C', '#ECE3DF'], ['#7F9AA6', '#CCD8DA']];
@@ -798,7 +795,7 @@ $('#navApps2').addEventListener('click', e => { const el = e.target.closest('[da
       try {
         const center = new naver.maps.LatLng(H[0], H[1]);
         $('#mapwrap').classList.add('live');
-        nmap = new naver.maps.Map('livemap', { center, zoom: 16, draggable: false, pinchZoom: true, scrollWheel: false,
+        nmap = new naver.maps.Map('livemap', { center, zoom: 16, draggable: true, pinchZoom: true, scrollWheel: false,
           zoomControl: true, zoomControlOptions: { position: naver.maps.Position.TOP_RIGHT, style: naver.maps.ZoomControlStyle.SMALL } });
         new naver.maps.Marker({ position: center, map: nmap, icon: { content: '<div class="pin-hotel"></div>', anchor: new naver.maps.Point(14, 28) } });
       } catch { nmap = null; $('#mapwrap').classList.remove('live'); }
@@ -818,13 +815,13 @@ $('#navApps2').addEventListener('click', e => { const el = e.target.closest('[da
     setTimeout(() => lmap?.invalidateSize(), 50);
     return lmap;
   }
-  function draw(path) { // path: [[lat,lng], ...]
+  function draw(path, markersOnly) { // path: [[lat,lng], ...]
     if (nmap) {
       nLayers.forEach(l => l.setMap(null));
       const p = path.map(([a, b]) => new naver.maps.LatLng(a, b));
       nLayers = [
-        new naver.maps.Polyline({ map: nmap, path: p, strokeColor: '#FFFFFF', strokeWeight: 8, strokeOpacity: .9 }),
-        new naver.maps.Polyline({ map: nmap, path: p, strokeColor: '#C2837F', strokeWeight: 5, strokeStyle: mode === 'foot' ? 'shortdot' : 'solid', strokeLineCap: 'round' }),
+        new naver.maps.Polyline({ map: nmap, path: p, strokeColor: '#FFFFFF', strokeWeight: markersOnly ? 0 : 8, strokeOpacity: .9 }),
+        new naver.maps.Polyline({ map: nmap, path: p, strokeColor: '#C2837F', strokeWeight: markersOnly ? 0 : 5, strokeStyle: mode === 'foot' ? 'shortdot' : 'solid', strokeLineCap: 'round' }),
         new naver.maps.Marker({ position: p[0], map: nmap, icon: { content: '<div class="pin-me"></div>', anchor: new naver.maps.Point(9, 9) } }),
       ];
       const bounds = new naver.maps.LatLngBounds(p[0], p[0]); p.forEach(x => bounds.extend(x));
@@ -834,17 +831,29 @@ $('#navApps2').addEventListener('click', e => { const el = e.target.closest('[da
     const m = leaflet(); if (!m) return;
     lLayer?.remove();
     lLayer = L.layerGroup([
-      L.polyline(path, { color: '#FFFFFF', weight: 8, opacity: .9 }),
-      L.polyline(path, { color: '#C2837F', weight: 5, dashArray: mode === 'foot' ? '1 9' : null, lineCap: 'round' }),
+      L.polyline(path, { color: '#FFFFFF', weight: markersOnly ? 0 : 8, opacity: .9 }),
+      L.polyline(path, { color: '#C2837F', weight: markersOnly ? 0 : 5, dashArray: mode === 'foot' ? '1 9' : null, lineCap: 'round' }),
       L.marker(path[0], { icon: L.divIcon({ className: '', html: '<div class="pin-me"></div>', iconSize: [18, 18], iconAnchor: [9, 9] }) }),
     ]).addTo(m);
     m.fitBounds(L.latLngBounds(path).pad(0.15));
   }
   const fmtTime = s => { const m = Math.max(1, Math.round(s / 60)); return m < 60 ? m + '분' : Math.floor(m / 60) + '시간 ' + (m % 60 ? (m % 60) + '분' : ''); };
   const fmtDist = m => m < 1000 ? Math.round(m) + 'm' : (m / 1000).toFixed(1) + 'km';
+  function transit() {
+    const en = encodeURIComponent(CONFIG.venue), host = encodeURIComponent(location.hostname || 'invitation');
+    const kakao = 'https://map.kakao.com/link/by/traffic/' + encodeURIComponent('내 위치') + ',' + me[0] + ',' + me[1] + '/' + en + ',' + H[0] + ',' + H[1];
+    $('#trKakao').href = kakao;
+    $('#trNaver').href = 'nmap://route/public?slat=' + me[0] + '&slng=' + me[1] + '&sname=' + encodeURIComponent('내 위치') + '&dlat=' + H[0] + '&dlng=' + H[1] + '&dname=' + en + '&appname=' + host;
+    $('#trNaver').onclick = () => setTimeout(() => { if (!document.hidden) location.href = kakao; }, 1500); // 네이버지도 앱이 없으면 카카오맵 웹으로
+    draw([me, H], true);
+    $('#routeSum').innerHTML = '<b>' + fmtDist(km(me, H) * 1000) + '</b><span>직선거리 · 가까운 역은 5호선 마포역(4번 출구에서 걸어서 5분)</span>';
+    $('#routeHint').textContent = '버스·지하철 경로와 시간은 지도 앱에서 내 위치 기준으로 바로 보여드려요.';
+  }
   async function route() {
     $('#routeBox').hidden = false;
-    $$('.modes button').forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === mode));
+    $('.modes button').forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === mode));
+    $('#transitLinks').hidden = mode !== 'transit';
+    if (mode === 'transit') return transit();
     $('#routeSum').innerHTML = '<span>경로를 찾는 중…</span>';
     try {
       const url = 'https://routing.openstreetmap.de/routed-' + mode + '/route/v1/driving/' + me[1] + ',' + me[0] + ';' + H[1] + ',' + H[0] + '?overview=full&geometries=geojson';
