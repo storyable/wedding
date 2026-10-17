@@ -645,7 +645,9 @@ if (guestName) {
   function after() {
     intro.hidden = true;
     window.startMusic?.();
-    if (!store.get('inv_asked')) setTimeout(() => { if ($$('.sheet-bg:not([hidden])').length === 0) { $('#askSheet').hidden = false; store.set('inv_asked', '1'); } }, 1600);
+    // 참석 의사를 아직 안 보낸 분께는 열 때마다 물어봐요 ('다음에 할게요'는 이번 방문 동안만 숨김)
+    let later = false; try { later = sessionStorage.getItem('inv_later') === '1'; } catch {}
+    if (!store.get('inv_rsvp_done') && !later) setTimeout(() => { if ($$('.sheet-bg:not([hidden])').length === 0) $('#askSheet').hidden = false; }, 1600);
   }
   function open() {
     if (done) return; done = true;
@@ -658,6 +660,7 @@ if (guestName) {
   setTimeout(open, 4000);
 })();
 $('#askYes').onclick = () => { $('#askSheet').hidden = true; $('#rsvpSheet').hidden = false; };
+$('#askSheet').addEventListener('click', e => { if (e.target.closest('[data-close]') || e.target.id === 'askSheet') { try { sessionStorage.setItem('inv_later', '1'); } catch {} } });
 
 // 예식 당일 띠
 const kstDay = d => new Date(d.getTime() + 9 * 3600e3).toISOString().slice(0, 10);
@@ -900,7 +903,7 @@ $('#rsvpForm').onsubmit = async e => {
   try {
     const r = await send('rsvp', { side: f.get('side'), attend: f.get('attend'), name, count: f.get('count'), meal: f.get('meal') });
     $('#rsvpMsg').textContent = r === 'ok' ? `${name}님, 알려주셔서 감사합니다` : '미리보기라서 아직 저장되지 않아요 (저장소 연결 후 동작)';
-    if (r === 'ok') e.target.reset();
+    if (r === 'ok') { e.target.reset(); store.set('inv_rsvp_done', '1'); }
   } catch { $('#rsvpMsg').textContent = '보내지 못했어요. 잠시 후 다시 시도해 주세요'; }
 };
 async function loadGuestbook() {
