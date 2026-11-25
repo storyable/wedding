@@ -667,9 +667,9 @@ const CONFIG = {
     { who: '신랑', name: '장준규', phone: '010-0000-0000' },
     { who: '신랑 아버지', name: '장병기', phone: '010-0000-0000' },
     { who: '신랑 어머니', name: '전성미', phone: '010-0000-0000' },
-    { who: '신부', name: '임효정', phone: '010-0000-0000' },
-    { who: '신부 아버지', name: '임창현', phone: '010-0000-0000' },
-    { who: '신부 어머니', name: '최연교', phone: '010-0000-0000' },
+    { who: '신부', name: '임효정', phone: '010-3890-6542' },
+    { who: '신부 아버지', name: '임창현', phone: '010-3592-6542' },
+    { who: '신부 어머니', name: '최연교', phone: '010-7536-6542' },
   ],
   // kakaopay: 카카오페이 앱 > 송금 > 송금코드 링크. 토스 버튼은 은행·계좌번호로 자동 생성.
   accounts: {
@@ -850,7 +850,7 @@ addEventListener('keydown', e => {
 });
 
 // 연락처
-$('#contacts').innerHTML = CONFIG.contacts.map(c => {
+$('#contacts').innerHTML = CONFIG.contacts.filter(c => !/0000-0000/.test(c.phone)).map(c => { // 아직 번호 안 넣은 분은 숨겨요
   const tel = c.phone.replace(/[^0-9]/g, '');
   return `<div class="contact"><div><div class="who">${esc(c.who)}</div><div>${esc(c.name)} <span class="muted small">${esc(c.phone)}</span></div></div>
     <div class="row"><a class="btn" href="tel:${tel}">전화</a><a class="btn" href="sms:${tel}">문자</a></div></div>`;
