@@ -357,6 +357,10 @@ input[type=text],input[type=number],textarea,select{background:rgba(255,255,255,
 .ios-bar{display:grid;grid-template-columns:repeat(4,1fr);height:44px;justify-items:center;align-items:center}
 .ios .grid{display:block}.ios .tile{display:none;width:100%;border-radius:0;aspect-ratio:auto;height:calc((min(100vw,480px) - 48px)*1.25)}.ios .tile.cur{display:block}.ios .tile{background:#141414!important}.ios .tile img{object-fit:contain}
 #moreBtn{display:none!important}
+/* 사진 보호: 사진 위에서는 두 손가락 확대·두 번 탭 확대·길게 눌러 저장·끌어다 놓기를 막아요 (글자 쪽 확대는 그대로) */
+#heroMedia,.ios .tile,.bleed,.ios{touch-action:pan-y;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+#heroMedia img,.ios .tile img{pointer-events:none;-webkit-user-drag:none}
+.ios .tile{cursor:default}
 #guestbook{display:none}
 /* 마무리 */
 .strip{width:max-content;margin:128px auto 0;padding:3px 18px;background:#BFB3A4;color:#2B2620;font:700 1em var(--latin);letter-spacing:.01em}
@@ -648,6 +652,7 @@ const CONFIG = {
   photos: { main: 'photos/w13.jpg', mid1: 'photos/w09.jpg', mid2: 'photos/w03.jpg', ending: 'photos/w20.jpg' },
   gallery: ["photos/w01.jpg","photos/w02.jpg","photos/w03.jpg","photos/w04.jpg","photos/w05.jpg","photos/w06.jpg","photos/w07.jpg","photos/w08.jpg","photos/w09.jpg","photos/w10.jpg","photos/w11.jpg","photos/w12.jpg","photos/w13.jpg","photos/w14.jpg","photos/w15.jpg","photos/w16.jpg","photos/w17.jpg","photos/w18.jpg","photos/w19.jpg","photos/w20.jpg","photos/w21.jpg","photos/w22.jpg","photos/w23.jpg","photos/w24.jpg","photos/w25.jpg","photos/w26.jpg","photos/w27.jpg","photos/w28.jpg"],              // 예: ['photos/g01.jpg', 'photos/g02.jpg', ...]
   galleryPlaceholders: 10,
+  photoZoom: false,        // 사진을 눌러 크게 보기 (false: 확대 창 없음)
   galleryFirst: 6,          // 처음에 보여줄 사진 수 (나머지는 '더 보기')
   petals: false,            // 화면에 꽃잎 날리기 (켜면 저사양 폰·카톡 브라우저에서 스크롤이 무거워져요)
   music: '',                // 배경음악 파일. 예: 'music/song.mp3' (비워두면 버튼이 숨어요)
@@ -832,7 +837,7 @@ function show(i) {
   $('#lbIdx').textContent = `${cur + 1} / ${photos.length}`;
   $('#lb').hidden = false;
 }
-$('#grid').onclick = e => { const t = e.target.closest('.tile'); if (t) show(+t.dataset.i); };
+$('#grid').onclick = e => { if (!CONFIG.photoZoom) return; const t = e.target.closest('.tile'); if (t) show(+t.dataset.i); };
 $('#lbPrev').onclick = () => show(cur - 1);
 $('#lbNext').onclick = () => show(cur + 1);
 $('#lb .close').onclick = () => ($('#lb').hidden = true);
@@ -1135,6 +1140,10 @@ if ('IntersectionObserver' in window && !still) {
   const show = i => { cur = (i + tiles.length) % tiles.length; tiles.forEach((t, j) => t.classList.toggle('cur', j === cur)); $id('iosTime').textContent = (cur + 1) + ' / ' + tiles.length; };
   if (tiles.length) show(0);
   $id('iosPrev').onclick = () => show(cur - 1); $id('iosNext').onclick = () => show(cur + 1);
+  const isPhoto = el => el && el.closest && el.closest('#heroMedia,.ios,.bleed');
+  addEventListener('contextmenu', e => { if (isPhoto(e.target)) e.preventDefault(); });
+  addEventListener('dragstart', e => { if (isPhoto(e.target)) e.preventDefault(); });
+  addEventListener('gesturestart', e => { if (isPhoto(e.target)) e.preventDefault(); }, { passive: false }); // 아이폰 두 손가락 확대
   $id('toTop').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 })();
 </script>
