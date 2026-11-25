@@ -1013,7 +1013,14 @@ $('#navApps2').addEventListener('click', e => { const el = e.target.closest('[da
 // 참석 여부 · 방명록 저장 (Google Apps Script)
 async function send(kind, data) {
   if (!CONFIG.endpoint) return 'preview';
-  await fetch(CONFIG.endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ kind, ...data, at: new Date().toISOString() }) });
+  const opts = { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ kind, ...data, at: new Date().toISOString() }) };
+  let r;
+  try { r = await fetch(CONFIG.endpoint, opts); }
+  catch { // 일부 앱 내장 브라우저가 응답 읽기를 막으면: 응답은 못 읽어도 보내기는 해요
+    await fetch(CONFIG.endpoint, { ...opts, mode: 'no-cors' }); return 'ok';
+  }
+  const j = await r.json().catch(() => ({}));
+  if (!j.ok) throw new Error('not saved'); // 시트에 저장됐다는 답을 받아야만 '감사합니다'를 보여줘요
   return 'ok';
 }
 $('#rsvpForm').onsubmit = async e => {
