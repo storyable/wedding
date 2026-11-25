@@ -14,7 +14,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Hahmlet:wght@400;600&family=Mrs+Saint+Delafield&family=La+Belle+Aurore&family=Montserrat:wght@400&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Hahmlet:wght@400;600&family=Mrs+Saint+Delafield&family=La+Belle+Aurore&family=Montserrat:wght@400&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
 /* Layout: an editorial photo-book column (max 480px). Full-bleed photo bands break the column; text sections sit on
    paper with English serif titles over small Korean subtitles. Quick bar docked at the bottom. */
@@ -274,12 +274,26 @@ footer{text-align:center;color:var(--muted);font-size:.8em;padding-top:56px}
 
 /* ===== 레이스 편지지 테마 ===== */
 :root{--fs:16px;--outside:#E9E8E4;--paper:#F2F1EE;--tint:rgba(255,255,255,.42);--ink:#262626;--muted:#77736C;--water:#77736C;--blossom:#6B0E1A;--line:rgba(38,38,38,.42);
-  --display:'Gowun Batang',serif;--body:'Gowun Batang',serif;--latin:'PT Serif',Georgia,serif;--script:'Mrs Saint Delafield',cursive}
+  --display:'Gowun Batang',serif;--body:'Gowun Batang',serif;--latin:'PT Serif',Georgia,serif;--script:'Mrs Saint Delafield',cursive;--name:'Cormorant Garamond',Georgia,serif}
 html.large{--fs:19px}
 body{line-height:1.8}
 .book,.sheet,.sketch-full{background:#F0EFEC url(paper.jpg) 0 0/900px 900px}
 .book{padding-bottom:40px;box-shadow:none}
-#intro,#petals,.quick,#shareBtn{display:none!important}
+#petals,.quick,#shareBtn{display:none!important}
+#intro{background:#F0EFEC url(paper.jpg) 0 0/900px 900px;gap:30px}
+.env{width:min(82vw,340px)}
+.env-back{background:#E4DFD6;border-radius:4px;box-shadow:0 22px 44px -20px rgba(60,48,36,.45)}
+.letter{background:#FBFAF7;border-radius:2px;box-shadow:0 1px 3px rgba(60,48,36,.12);gap:6px}
+.letter{z-index:1}.env-front{z-index:2}.flap{z-index:3}.seal{z-index:4}.env.open .flap{z-index:0}
+.letter>*{opacity:0;transition:opacity .5s ease .7s}.env.open .letter>*{opacity:1}
+.letter b{font:400 .72em Montserrat,sans-serif;letter-spacing:.32em;color:#8A847B}
+.letter span{font:500 1.45em/1.2 var(--name);font-style:normal;color:#262626}
+.env-front{background:linear-gradient(180deg,#EDE9E2,#E7E2D9);border-radius:4px;padding-bottom:10%}
+.env-front p{font:400 1em var(--body);color:#4B4946;letter-spacing:.04em}
+.flap{background:linear-gradient(180deg,#E9E5DD,#DDD7CC);border-radius:4px 4px 0 0;filter:drop-shadow(0 2px 2px rgba(60,48,36,.15))}
+.seal{width:50px;height:50px;margin:-25px 0 0 -25px;background:radial-gradient(circle at 35% 30%,#9A2635,#6B0E1A 58%,#520912);font:italic 500 17px var(--name);letter-spacing:.02em;box-shadow:0 2px 5px rgba(60,10,16,.35),inset 0 0 0 3px rgba(255,255,255,.08)}
+#intro .hint{font:400 .92em var(--body);color:#77736C}
+#intro .skip{font:400 .82em var(--body);color:#8A847B}
 .inner{padding-left:20px;padding-right:20px}
 .tools{top:calc(env(safe-area-inset-top,0px) + 8px);right:10px}.tools button{-webkit-backdrop-filter:none;backdrop-filter:none;width:38px;height:38px;border:1px solid rgba(38,38,38,.14);background:rgba(245,244,241,.7);font-size:15px}
 section{padding-block:128px 0}
@@ -302,13 +316,13 @@ section{padding-block:128px 0}
 .l-band{fill:none;stroke:#F5F3EF;stroke-width:4.4;stroke-linejoin:round}
 .l-hole circle{fill:#C9C5BD}
 .l-edge{fill:none;stroke:#FBF9F5;stroke-width:.6}
-.names{font:400 44px/1.3 var(--script);margin:calc(6svh + 16px) 0 0;color:#212121;white-space:nowrap}
+.names{font:500 36px/1.3 var(--name);letter-spacing:.01em;margin:calc(6svh + 16px) 0 0;color:#212121;white-space:nowrap}
 .ribbon{width:52px;margin-top:auto;margin-bottom:9svh}
 .hero-info{padding-block:64px 0}
 .hero-info .d{font:400 1em var(--body);letter-spacing:1px;white-space:pre}
 .hero-info .v{color:rgba(38,38,38,.82);font-size:1em;margin-top:6px}
 .bleed{background:#D8D5CF}
-.mid{margin:128px 20px 0;aspect-ratio:4/5}.mid .cap{display:none}
+.mid{margin:128px 20px 0;aspect-ratio:1067/1600}.mid .ph{inset:0}.mid .cap{display:none}
 .ending{margin:128px 20px 0}.ending .scrim{display:none}.ending .msg{display:none}
 /* 오시는 길 */
 .lbl{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-top:1px solid var(--line);margin-top:36px;padding-top:15px;text-align:left}
@@ -348,7 +362,17 @@ input[type=text],input[type=number],textarea,select{background:rgba(255,255,255,
 .seg input:checked+label{background:#3A3835;border-color:#3A3835;color:#fff}
 .sheet .btn,.panel .btn{justify-self:center}
 .sheet .btn.wide{display:flex;margin:0 auto}
-/* 앨범 카드 */
+/* 앨범: 3칸 격자, 누르면 크게 */
+#gallery .grid{grid-template-columns:repeat(3,1fr);gap:3px}
+#gallery .tile{aspect-ratio:1;border-radius:0;cursor:pointer;background:#DAD6CF!important}
+#gallery .tile img{object-fit:cover}
+#moreBtn{margin-top:22px!important}
+#lb{background:rgba(18,17,16,.96)}
+#lb .stage{padding:56px 0}#lb .stage>div{width:100%;aspect-ratio:auto;height:100%;max-height:none;background:none!important}
+#lb .stage img{animation:lbIn .28s ease}
+@keyframes lbIn{from{opacity:.35}}
+#lb .bar{font:400 14px var(--name);letter-spacing:.08em}
+/* (예전 아이폰 앨범 카드 — 지금은 안 씀) */
 .ios{background:#fff;margin:0 4px}
 .ios-top{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;height:53px;font-family:Hahmlet,var(--latin);line-height:1.2}
 .ios-top b{display:block;font:600 14px Hahmlet,serif;color:#111}.ios-top small{font:400 13px Hahmlet,serif;color:#8D8D8D}
@@ -356,20 +380,19 @@ input[type=text],input[type=number],textarea,select{background:rgba(255,255,255,
 .ios svg{width:22px;height:22px;fill:none;stroke:#1B7CF6;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .ios-bar{display:grid;grid-template-columns:repeat(4,1fr);height:44px;justify-items:center;align-items:center}
 .ios .grid{display:block}.ios .tile{display:none;width:100%;border-radius:0;aspect-ratio:auto;height:calc((min(100vw,480px) - 48px)*1.25)}.ios .tile.cur{display:block}.ios .tile{background:#141414!important}.ios .tile img{object-fit:contain}
-#moreBtn{display:none!important}
 /* 사진 보호: 사진 위에서는 두 손가락 확대·두 번 탭 확대·길게 눌러 저장·끌어다 놓기를 막아요 (글자 쪽 확대는 그대로) */
-#heroMedia,.ios .tile,.bleed,.ios{touch-action:pan-y;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
-#heroMedia img,.ios .tile img{pointer-events:none;-webkit-user-drag:none}
-.ios .tile{cursor:default}
+#heroMedia,.ios .tile,.bleed,.ios,#gallery .tile,#lb .stage{touch-action:pan-y;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+#heroMedia img,.ios .tile img,#gallery .tile img,#lb img{pointer-events:none;-webkit-user-drag:none}
 #guestbook{display:none}
 /* 마무리 */
 .strip{width:max-content;margin:128px auto 0;padding:3px 18px;background:#BFB3A4;color:#2B2620;font:700 1em var(--latin);letter-spacing:.01em}
-footer.end{position:relative;padding:96px 20px 34px;color:var(--ink)}
+footer.end{position:relative;padding:150px 20px 34px;color:var(--ink)}
 .kl{display:inline-flex;align-items:center;border:1px solid rgba(38,38,38,.72);border-radius:999px;height:38px;padding:0 26px 0 20px;background:none}
 .kl button{border:0;background:none;padding:0 12px;font:italic 400 1em var(--latin);letter-spacing:2.6px;display:flex;align-items:center;gap:12px}
 .kl button+button{border-left:1px solid rgba(38,38,38,.72)}
 .totop{position:absolute;right:20px;bottom:60px;width:42px;height:42px;border:0;background:none;display:grid;place-items:center}.totop svg{width:18px;height:18px;fill:none;stroke:#000;stroke-width:2.4}
-.sign{font:400 32px/1 var(--script);margin-top:74px}
+.sign{font:500 26px/1 var(--name);letter-spacing:.01em;margin-top:74px}
+.names i,.sign i{font-style:italic;font-weight:400;margin:0 .12em}
 </style><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="heartClip" clipPathUnits="objectBoundingBox"><polygon points="0.5000,0.2394 0.5015,0.2247 0.5044,0.2100 0.5084,0.1948 0.5132,0.1802 0.5182,0.1672 0.5242,0.1535 0.5313,0.1393 0.5376,0.1281 0.5457,0.1151 0.5535,0.1038 0.5621,0.0927 0.5713,0.0817 0.5813,0.0711 0.5903,0.0624 0.6015,0.0527 0.6116,0.0448 0.6222,0.0375 0.6332,0.0306 0.6446,0.0244 0.6564,0.0188 0.6685,0.0139 0.6810,0.0096 0.6937,0.0061 0.7067,0.0034 0.7176,0.0017 0.7310,0.0004 0.7444,0.0000 0.7557,0.0003 0.7693,0.0013 0.7806,0.0029 0.7942,0.0055 0.8055,0.0084 0.8189,0.0125 0.8299,0.0166 0.8430,0.0223 0.8537,0.0276 0.8642,0.0334 0.8765,0.0412 0.8865,0.0482 0.8981,0.0572 0.9075,0.0652 0.9182,0.0755 0.9285,0.0864 0.9366,0.0959 0.9458,0.1078 0.9543,0.1202 0.9610,0.1309 0.9683,0.1441 0.9750,0.1577 0.9808,0.1717 0.9860,0.1860 0.9903,0.2006 0.9939,0.2155 0.9967,0.2305 0.9986,0.2457 0.9997,0.2611 1.0000,0.2765 0.9994,0.2920 0.9980,0.3076 0.9958,0.3232 0.9934,0.3362 0.9897,0.3517 0.9852,0.3672 0.9808,0.3801 0.9750,0.3954 0.9695,0.4082 0.9635,0.4208 0.9557,0.4359 0.9487,0.4484 0.9413,0.4607 0.9334,0.4730 0.9251,0.4852 0.9182,0.4949 0.9093,0.5069 0.9000,0.5188 0.8924,0.5282 0.8825,0.5400 0.8724,0.5516 0.8642,0.5608 0.8537,0.5723 0.8451,0.5814 0.8365,0.5904 0.8255,0.6017 0.8166,0.6106 0.8055,0.6216 0.7965,0.6304 0.7874,0.6392 0.7761,0.6500 0.7670,0.6586 0.7557,0.6694 0.7467,0.6779 0.7377,0.6864 0.7265,0.6969 0.7176,0.7053 0.7067,0.7157 0.6958,0.7260 0.6873,0.7342 0.6768,0.7444 0.6665,0.7545 0.6564,0.7645 0.6485,0.7725 0.6389,0.7823 0.6277,0.7941 0.6186,0.8037 0.6099,0.8133 0.5999,0.8246 0.5903,0.8357 0.5813,0.8466 0.5727,0.8573 0.5646,0.8678 0.5559,0.8797 0.5479,0.8912 0.5396,0.9039 0.5322,0.9160 0.5249,0.9289 0.5182,0.9422 0.5122,0.9554 0.5067,0.9701 0.5025,0.9842 0.5000,1.0000 0.4976,0.9849 0.4936,0.9711 0.4882,0.9566 0.4824,0.9434 0.4758,0.9303 0.4687,0.9175 0.4614,0.9054 0.4532,0.8928 0.4453,0.8813 0.4366,0.8695 0.4287,0.8591 0.4202,0.8484 0.4112,0.8375 0.4017,0.8264 0.3918,0.8151 0.3831,0.8056 0.3742,0.7960 0.3630,0.7843 0.3535,0.7745 0.3456,0.7665 0.3356,0.7565 0.3253,0.7464 0.3148,0.7362 0.3063,0.7280 0.2955,0.7177 0.2846,0.7073 0.2757,0.6990 0.2646,0.6885 0.2556,0.6800 0.2466,0.6715 0.2352,0.6608 0.2262,0.6522 0.2148,0.6413 0.2058,0.6326 0.1968,0.6238 0.1856,0.6128 0.1767,0.6039 0.1657,0.5927 0.1570,0.5837 0.1484,0.5746 0.1379,0.5631 0.1296,0.5539 0.1195,0.5423 0.1096,0.5306 0.1019,0.5212 0.0925,0.5093 0.0835,0.4973 0.0766,0.4876 0.0682,0.4755 0.0603,0.4632 0.0528,0.4508 0.0457,0.4384 0.0377,0.4233 0.0317,0.4107 0.0261,0.3980 0.0201,0.3826 0.0156,0.3698 0.0110,0.3543 0.0072,0.3388 0.0046,0.3258 0.0023,0.3102 0.0007,0.2946 0.0000,0.2791 0.0002,0.2636 0.0012,0.2483 0.0030,0.2330 0.0056,0.2180 0.0090,0.2031 0.0132,0.1885 0.0182,0.1741 0.0240,0.1600 0.0305,0.1463 0.0377,0.1330 0.0443,0.1223 0.0528,0.1098 0.0618,0.0978 0.0699,0.0882 0.0800,0.0773 0.0907,0.0669 0.1000,0.0588 0.1115,0.0496 0.1215,0.0425 0.1337,0.0347 0.1442,0.0287 0.1549,0.0233 0.1679,0.0175 0.1789,0.0133 0.1923,0.0090 0.2035,0.0060 0.2171,0.0033 0.2284,0.0016 0.2420,0.0004 0.2533,0.0000 0.2668,0.0003 0.2802,0.0014 0.2912,0.0030 0.3042,0.0056 0.3169,0.0090 0.3294,0.0131 0.3416,0.0179 0.3535,0.0234 0.3649,0.0296 0.3760,0.0363 0.3866,0.0436 0.3968,0.0514 0.4081,0.0610 0.4173,0.0697 0.4273,0.0802 0.4366,0.0911 0.4453,0.1022 0.4532,0.1135 0.4614,0.1265 0.4678,0.1377 0.4751,0.1520 0.4812,0.1657 0.4863,0.1788 0.4912,0.1936 0.4953,0.2089 0.4984,0.2239"/></clipPath></defs></svg>
 
 <div id="intro">
@@ -400,7 +423,7 @@ footer.end{position:relative;padding:96px 20px 34px;color:var(--ink)}
   <g filter="url(#fray)"><g class="l-out"><circle cx="51.82" cy="8.56" r="2.28" fill="#D3CFC8"/><circle cx="54.11" cy="5.46" r="2.37" fill="#F7F5F1"/><circle cx="56.35" cy="2.23" r="1.93" fill="#F7F5F1"/><circle cx="59.56" cy="0.06" r="2.60" fill="#E2DED7"/><circle cx="63.41" cy="-1.15" r="2.35" fill="#F2EFEA"/><circle cx="66.93" cy="-2.85" r="2.25" fill="#E2DED7"/><circle cx="70.86" cy="-3.68" r="2.46" fill="#F2EFEA"/><circle cx="74.68" cy="-2.85" r="2.18" fill="#F7F5F1"/><circle cx="78.47" cy="-2.88" r="1.97" fill="#F2EFEA"/><circle cx="82.43" cy="-2.87" r="2.19" fill="#F2EFEA"/><circle cx="86.04" cy="-1.31" r="2.61" fill="#EFECE6"/><circle cx="89.41" cy="0.65" r="2.39" fill="#F7F5F1"/><circle cx="92.70" cy="2.64" r="2.51" fill="#F2EFEA"/><circle cx="95.54" cy="5.20" r="2.71" fill="#E2DED7"/><circle cx="98.33" cy="8.10" r="2.18" fill="#F7F5F1"/><circle cx="99.87" cy="11.51" r="2.49" fill="#F7F5F1"/><circle cx="101.43" cy="15.28" r="2.44" fill="#F7F5F1"/><circle cx="103.02" cy="18.86" r="1.97" fill="#EFECE6"/><circle cx="103.37" cy="22.78" r="2.11" fill="#F7F5F1"/><circle cx="103.39" cy="27.08" r="2.62" fill="#D3CFC8"/><circle cx="101.30" cy="30.41" r="2.02" fill="#EFECE6"/><circle cx="100.15" cy="34.08" r="1.68" fill="#D3CFC8"/><circle cx="98.59" cy="37.80" r="1.83" fill="#F2EFEA"/><circle cx="96.46" cy="40.65" r="2.32" fill="#F2EFEA"/><circle cx="93.23" cy="42.62" r="2.33" fill="#F2EFEA"/><circle cx="90.79" cy="45.35" r="2.56" fill="#F2EFEA"/><circle cx="88.93" cy="48.42" r="2.32" fill="#D3CFC8"/><circle cx="85.41" cy="50.13" r="1.52" fill="#F2EFEA"/><circle cx="82.96" cy="52.65" r="1.73" fill="#F7F5F1"/><circle cx="80.54" cy="55.23" r="1.82" fill="#D3CFC8"/><circle cx="77.55" cy="57.03" r="2.07" fill="#F2EFEA"/><circle cx="74.53" cy="58.68" r="1.77" fill="#F2EFEA"/><circle cx="72.43" cy="61.39" r="2.29" fill="#EFECE6"/><circle cx="69.52" cy="63.30" r="2.65" fill="#D3CFC8"/><circle cx="67.02" cy="65.46" r="2.07" fill="#EFECE6"/><circle cx="64.27" cy="67.42" r="2.54" fill="#EFECE6"/><circle cx="61.69" cy="69.53" r="2.31" fill="#F2EFEA"/><circle cx="59.45" cy="71.84" r="2.30" fill="#F7F5F1"/><circle cx="57.80" cy="74.80" r="1.51" fill="#D3CFC8"/><circle cx="55.20" cy="76.75" r="2.32" fill="#E2DED7"/><circle cx="54.25" cy="79.65" r="1.92" fill="#E2DED7"/><circle cx="50.00" cy="84.62" r="1.98" fill="#E2DED7"/><circle cx="46.07" cy="79.58" r="2.17" fill="#EFECE6"/><circle cx="44.31" cy="77.24" r="2.32" fill="#E2DED7"/><circle cx="42.60" cy="74.67" r="2.26" fill="#F2EFEA"/><circle cx="40.65" cy="72.00" r="2.05" fill="#EFECE6"/><circle cx="38.04" cy="70.13" r="2.52" fill="#F7F5F1"/><circle cx="35.90" cy="67.57" r="2.03" fill="#F2EFEA"/><circle cx="33.06" cy="65.76" r="2.01" fill="#F7F5F1"/><circle cx="30.37" cy="63.85" r="2.62" fill="#D3CFC8"/><circle cx="27.87" cy="61.45" r="2.70" fill="#D3CFC8"/><circle cx="24.96" cy="59.81" r="2.47" fill="#F7F5F1"/><circle cx="22.89" cy="56.93" r="2.55" fill="#D3CFC8"/><circle cx="20.29" cy="54.64" r="2.36" fill="#F7F5F1"/><circle cx="16.80" cy="53.42" r="1.91" fill="#F2EFEA"/><circle cx="14.41" cy="50.80" r="2.04" fill="#F2EFEA"/><circle cx="11.22" cy="48.68" r="2.23" fill="#F2EFEA"/><circle cx="8.85" cy="46.12" r="2.42" fill="#F2EFEA"/><circle cx="6.53" cy="43.23" r="2.61" fill="#E2DED7"/><circle cx="4.20" cy="40.47" r="2.69" fill="#E2DED7"/><circle cx="1.41" cy="38.12" r="1.73" fill="#F2EFEA"/><circle cx="0.17" cy="34.21" r="1.59" fill="#F7F5F1"/><circle cx="-2.16" cy="31.00" r="2.49" fill="#F2EFEA"/><circle cx="-2.20" cy="27.08" r="1.92" fill="#EFECE6"/><circle cx="-3.61" cy="23.03" r="1.70" fill="#E2DED7"/><circle cx="-3.35" cy="19.06" r="2.67" fill="#EFECE6"/><circle cx="-2.40" cy="15.21" r="1.52" fill="#D3CFC8"/><circle cx="-0.73" cy="11.32" r="2.70" fill="#D3CFC8"/><circle cx="2.04" cy="8.69" r="2.60" fill="#E2DED7"/><circle cx="3.87" cy="4.95" r="1.65" fill="#E2DED7"/><circle cx="7.08" cy="2.77" r="2.06" fill="#D3CFC8"/><circle cx="10.34" cy="0.73" r="2.55" fill="#EFECE6"/><circle cx="13.86" cy="-0.87" r="2.44" fill="#EFECE6"/><circle cx="17.62" cy="-1.70" r="1.69" fill="#F2EFEA"/><circle cx="21.28" cy="-2.77" r="2.56" fill="#F2EFEA"/><circle cx="25.05" cy="-3.94" r="1.77" fill="#D3CFC8"/><circle cx="28.87" cy="-3.52" r="1.77" fill="#D3CFC8"/><circle cx="32.77" cy="-2.67" r="1.59" fill="#D3CFC8"/><circle cx="36.56" cy="-1.73" r="2.00" fill="#E2DED7"/><circle cx="39.90" cy="0.54" r="1.66" fill="#F2EFEA"/><circle cx="43.46" cy="2.12" r="1.97" fill="#D3CFC8"/><circle cx="46.20" cy="4.86" r="2.68" fill="#E2DED7"/><circle cx="48.94" cy="7.76" r="2.54" fill="#F2EFEA"/></g><path d="M50.00 19.47L50.15 18.28L50.44 17.08L50.84 15.85L51.32 14.66L51.82 13.60L52.42 12.49L53.13 11.33L53.76 10.42L54.57 9.36L55.35 8.45L56.21 7.54L57.13 6.65L58.13 5.79L59.03 5.08L60.15 4.29L61.16 3.65L62.22 3.05L63.32 2.49L64.46 1.98L65.64 1.53L66.85 1.13L68.10 0.78L69.37 0.50L70.67 0.28L71.76 0.14L73.10 0.04L74.44 0.00L75.57 0.02L76.93 0.11L78.06 0.24L79.42 0.45L80.55 0.68L81.89 1.02L82.99 1.35L84.30 1.81L85.37 2.24L86.42 2.72L87.65 3.35L88.65 3.92L89.81 4.65L90.75 5.31L91.82 6.14L92.85 7.03L93.66 7.80L94.58 8.77L95.43 9.77L96.10 10.65L96.83 11.72L97.50 12.83L98.08 13.97L98.60 15.13L99.03 16.32L99.39 17.53L99.67 18.75L99.86 19.99L99.97 21.24L100.00 22.49L99.94 23.76L99.80 25.02L99.58 26.29L99.34 27.35L98.97 28.61L98.52 29.87L98.08 30.92L97.50 32.17L96.95 33.20L96.35 34.23L95.57 35.46L94.87 36.47L94.13 37.48L93.34 38.48L92.51 39.47L91.82 40.26L90.93 41.23L90.00 42.20L89.24 42.97L88.25 43.92L87.24 44.87L86.42 45.62L85.37 46.55L84.51 47.29L83.65 48.03L82.55 48.94L81.66 49.67L80.55 50.57L79.65 51.28L78.74 51.99L77.61 52.88L76.70 53.58L75.57 54.45L74.67 55.14L73.77 55.83L72.65 56.69L71.76 57.37L70.67 58.22L69.58 59.06L68.73 59.72L67.68 60.55L66.65 61.37L65.64 62.19L64.85 62.84L63.89 63.64L62.77 64.59L61.86 65.38L60.99 66.16L59.99 67.07L59.03 67.98L58.13 68.87L57.27 69.74L56.46 70.59L55.59 71.56L54.79 72.50L53.96 73.53L53.22 74.51L52.49 75.56L51.82 76.64L51.22 77.72L50.67 78.92L50.25 80.06L50.00 81.35L49.76 80.12L49.36 78.99L48.82 77.81L48.24 76.75L47.58 75.67L46.87 74.63L46.14 73.65L45.32 72.63L44.53 71.69L43.66 70.73L42.87 69.88L42.02 69.01L41.12 68.13L40.17 67.23L39.18 66.31L38.31 65.54L37.42 64.75L36.30 63.80L35.35 63.00L34.56 62.35L33.56 61.54L32.53 60.72L31.48 59.89L30.63 59.22L29.55 58.39L28.46 57.54L27.57 56.86L26.46 56.01L25.56 55.32L24.66 54.62L23.52 53.75L22.62 53.05L21.48 52.17L20.58 51.46L19.68 50.75L18.56 49.85L17.67 49.12L16.57 48.21L15.70 47.48L14.84 46.74L13.79 45.81L12.96 45.06L11.95 44.11L10.96 43.16L10.19 42.39L9.25 41.43L8.35 40.45L7.66 39.67L6.82 38.68L6.03 37.68L5.28 36.67L4.57 35.66L3.77 34.44L3.17 33.41L2.61 32.37L2.01 31.13L1.56 30.08L1.10 28.82L0.72 27.56L0.46 26.50L0.23 25.23L0.07 23.97L0.00 22.70L0.02 21.45L0.12 20.20L0.30 18.96L0.56 17.73L0.90 16.52L1.32 15.33L1.82 14.16L2.40 13.02L3.05 11.90L3.77 10.82L4.43 9.95L5.28 8.93L6.18 7.96L6.99 7.18L8.00 6.29L9.07 5.44L10.00 4.78L11.15 4.04L12.15 3.46L13.37 2.82L14.42 2.34L15.49 1.89L16.79 1.42L17.89 1.08L19.23 0.73L20.35 0.49L21.71 0.27L22.84 0.13L24.20 0.03L25.33 0.00L26.68 0.03L28.02 0.12L29.12 0.24L30.42 0.46L31.69 0.73L32.94 1.07L34.16 1.46L35.35 1.91L36.49 2.40L37.60 2.95L38.66 3.54L39.68 4.18L40.81 4.96L41.73 5.67L42.73 6.52L43.66 7.41L44.53 8.32L45.32 9.23L46.14 10.29L46.78 11.20L47.51 12.36L48.12 13.48L48.63 14.54L49.12 15.75L49.53 16.99L49.84 18.22Z" class="l-band"/><g class="l-hole"><circle cx="54.00" cy="5.36" r=".55"/><circle cx="59.96" cy="0.76" r=".55"/><circle cx="67.11" cy="-2.17" r=".55"/><circle cx="74.69" cy="-3.10" r=".55"/><circle cx="82.22" cy="-2.10" r=".55"/><circle cx="89.35" cy="0.75" r=".55"/><circle cx="95.49" cy="5.25" r=".55"/><circle cx="100.20" cy="11.32" r=".55"/><circle cx="102.84" cy="18.89" r=".55"/><circle cx="102.62" cy="26.92" r=".55"/><circle cx="100.03" cy="34.02" r=".55"/><circle cx="95.92" cy="40.22" r=".55"/><circle cx="91.01" cy="45.57" r=".55"/><circle cx="85.64" cy="50.40" r=".55"/><circle cx="80.20" cy="54.79" r=".55"/><circle cx="74.76" cy="58.98" r=".55"/><circle cx="69.40" cy="63.14" r=".55"/><circle cx="64.26" cy="67.40" r=".55"/><circle cx="59.50" cy="71.89" r=".55"/><circle cx="55.36" cy="76.86" r=".55"/><circle cx="50.00" cy="84.45" r=".55"/><circle cx="44.71" cy="76.96" r=".55"/><circle cx="40.63" cy="72.03" r=".55"/><circle cx="35.91" cy="67.55" r=".55"/><circle cx="30.81" cy="63.31" r=".55"/><circle cx="25.46" cy="59.15" r=".55"/><circle cx="20.03" cy="54.97" r=".55"/><circle cx="14.58" cy="50.59" r=".55"/><circle cx="9.19" cy="45.77" r=".55"/><circle cx="4.25" cy="40.43" r=".55"/><circle cx="0.09" cy="34.25" r=".55"/><circle cx="-2.57" cy="27.16" r=".55"/><circle cx="-2.87" cy="19.13" r=".55"/><circle cx="-0.32" cy="11.54" r=".55"/><circle cx="4.33" cy="5.43" r=".55"/><circle cx="10.42" cy="0.87" r=".55"/><circle cx="17.53" cy="-2.04" r=".55"/><circle cx="25.06" cy="-3.10" r=".55"/><circle cx="32.66" cy="-2.23" r=".55"/><circle cx="39.84" cy="0.65" r=".55"/><circle cx="45.85" cy="5.21" r=".55"/></g></g>
   <path d="M50.00 19.47L50.15 18.28L50.44 17.08L50.84 15.85L51.32 14.66L51.82 13.60L52.42 12.49L53.13 11.33L53.76 10.42L54.57 9.36L55.35 8.45L56.21 7.54L57.13 6.65L58.13 5.79L59.03 5.08L60.15 4.29L61.16 3.65L62.22 3.05L63.32 2.49L64.46 1.98L65.64 1.53L66.85 1.13L68.10 0.78L69.37 0.50L70.67 0.28L71.76 0.14L73.10 0.04L74.44 0.00L75.57 0.02L76.93 0.11L78.06 0.24L79.42 0.45L80.55 0.68L81.89 1.02L82.99 1.35L84.30 1.81L85.37 2.24L86.42 2.72L87.65 3.35L88.65 3.92L89.81 4.65L90.75 5.31L91.82 6.14L92.85 7.03L93.66 7.80L94.58 8.77L95.43 9.77L96.10 10.65L96.83 11.72L97.50 12.83L98.08 13.97L98.60 15.13L99.03 16.32L99.39 17.53L99.67 18.75L99.86 19.99L99.97 21.24L100.00 22.49L99.94 23.76L99.80 25.02L99.58 26.29L99.34 27.35L98.97 28.61L98.52 29.87L98.08 30.92L97.50 32.17L96.95 33.20L96.35 34.23L95.57 35.46L94.87 36.47L94.13 37.48L93.34 38.48L92.51 39.47L91.82 40.26L90.93 41.23L90.00 42.20L89.24 42.97L88.25 43.92L87.24 44.87L86.42 45.62L85.37 46.55L84.51 47.29L83.65 48.03L82.55 48.94L81.66 49.67L80.55 50.57L79.65 51.28L78.74 51.99L77.61 52.88L76.70 53.58L75.57 54.45L74.67 55.14L73.77 55.83L72.65 56.69L71.76 57.37L70.67 58.22L69.58 59.06L68.73 59.72L67.68 60.55L66.65 61.37L65.64 62.19L64.85 62.84L63.89 63.64L62.77 64.59L61.86 65.38L60.99 66.16L59.99 67.07L59.03 67.98L58.13 68.87L57.27 69.74L56.46 70.59L55.59 71.56L54.79 72.50L53.96 73.53L53.22 74.51L52.49 75.56L51.82 76.64L51.22 77.72L50.67 78.92L50.25 80.06L50.00 81.35L49.76 80.12L49.36 78.99L48.82 77.81L48.24 76.75L47.58 75.67L46.87 74.63L46.14 73.65L45.32 72.63L44.53 71.69L43.66 70.73L42.87 69.88L42.02 69.01L41.12 68.13L40.17 67.23L39.18 66.31L38.31 65.54L37.42 64.75L36.30 63.80L35.35 63.00L34.56 62.35L33.56 61.54L32.53 60.72L31.48 59.89L30.63 59.22L29.55 58.39L28.46 57.54L27.57 56.86L26.46 56.01L25.56 55.32L24.66 54.62L23.52 53.75L22.62 53.05L21.48 52.17L20.58 51.46L19.68 50.75L18.56 49.85L17.67 49.12L16.57 48.21L15.70 47.48L14.84 46.74L13.79 45.81L12.96 45.06L11.95 44.11L10.96 43.16L10.19 42.39L9.25 41.43L8.35 40.45L7.66 39.67L6.82 38.68L6.03 37.68L5.28 36.67L4.57 35.66L3.77 34.44L3.17 33.41L2.61 32.37L2.01 31.13L1.56 30.08L1.10 28.82L0.72 27.56L0.46 26.50L0.23 25.23L0.07 23.97L0.00 22.70L0.02 21.45L0.12 20.20L0.30 18.96L0.56 17.73L0.90 16.52L1.32 15.33L1.82 14.16L2.40 13.02L3.05 11.90L3.77 10.82L4.43 9.95L5.28 8.93L6.18 7.96L6.99 7.18L8.00 6.29L9.07 5.44L10.00 4.78L11.15 4.04L12.15 3.46L13.37 2.82L14.42 2.34L15.49 1.89L16.79 1.42L17.89 1.08L19.23 0.73L20.35 0.49L21.71 0.27L22.84 0.13L24.20 0.03L25.33 0.00L26.68 0.03L28.02 0.12L29.12 0.24L30.42 0.46L31.69 0.73L32.94 1.07L34.16 1.46L35.35 1.91L36.49 2.40L37.60 2.95L38.66 3.54L39.68 4.18L40.81 4.96L41.73 5.67L42.73 6.52L43.66 7.41L44.53 8.32L45.32 9.23L46.14 10.29L46.78 11.20L47.51 12.36L48.12 13.48L48.63 14.54L49.12 15.75L49.53 16.99L49.84 18.22Z" class="l-edge"/>
 </svg></div>
-    <p class="names">Junkyu &amp; Hyojeong</p>
+    <p class="names">Junkyu <i>&amp;</i> Hyojeong</p>
     <svg class="ribbon" viewBox="0 0 60 50" aria-hidden="true">
   <g fill="none" stroke-linecap="butt" stroke-linejoin="round"><g stroke="#6B0E1A" stroke-width="3.6"><path d="M28.5 17C25 27 19 37 11.5 46"/><path d="M31.5 17C35 27 41 37 48.5 46"/><path d="M30 15C21 4 7 5 7 11.5c0 6.5 13 8.5 23 3.5Z"/><path d="M30 15C39 4 53 5 53 11.5c0 6.500-13 8.500-23 3.500Z"/></g>
   <g stroke="#94202E" stroke-width="1"><path d="M28.5 17C25 27 19 37 11.5 46"/><path d="M31.500 17C35 27 41 37 48.500 46"/><path d="M28 13C21 6 9 7 8.500 11"/><path d="M32 13C39 6 51 7 51.500 11"/></g></g>
@@ -452,11 +475,7 @@ footer.end{position:relative;padding:96px 20px 34px;color:var(--ink)}
   <section id="gallery" class="inner rv">
     <h2 class="sec-title"><em>Gallery</em></h2>
     <p class="sec-sub">우리의 순간들</p>
-    <div class="ios">
-      <div class="ios-top"><button id="iosPrev" aria-label="이전 사진"><svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8"/></svg></button><div><b>Today</b><small id="iosTime"></small></div><button id="iosNext" aria-label="다음 사진"><svg viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></button></div>
-      <div class="grid" id="grid"></div>
-      <div class="ios-bar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4M6 11H5v10h14V11h-1"/></svg><svg viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.500 4.500 0 0 1 8-2.800A4.500 4.500 0 0 1 20 9c0 6-8 11-8 11z"/></svg><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.500v.5"/></svg><svg viewBox="0 0 24 24"><path d="M3 7h9M18 7h3M3 17h3M12 17h9"/><circle cx="15" cy="7" r="2.500"/><circle cx="9" cy="17" r="2.500"/></svg></div>
-    </div>
+    <div class="grid" id="grid"></div>
     <button class="btn wide" id="moreBtn" style="margin-top:14px" hidden>사진 더 보기</button>
   </section>
 
@@ -526,7 +545,7 @@ footer.end{position:relative;padding:96px 20px 34px;color:var(--ink)}
     <h2 class="sec-title"><em>Information</em></h2>
     <p class="sec-sub">안내사항</p>
     <div class="cards">
-      <div class="card"><svg viewBox="0 0 34 34"><path d="M6 26h22M8 26c0-6 4-11 9-11s9 5 9 11M17 15v-3M15 12h4"/></svg><h3>식사 안내</h3><p class="fine">별도 마련된 서브룸에서는 앞서 식사가 제공됩니다. 해당 공간을 이용하실 하객분들께서는 안내에 따라 편하게 이동해 주시면 감사하겠습니다.</p></div>
+      <div class="card"><svg viewBox="0 0 34 34"><path d="M6 26h22M8 26c0-6 4-11 9-11s9 5 9 11M17 15v-3M15 12h4"/></svg><h3>식사 안내</h3><p>별도 마련된 서브룸에서는 앞서 식사가 제공됩니다. 해당 공간을 이용하실 하객분들께서는 안내에 따라 편하게 이동해 주시면 감사하겠습니다.</p></div>
       <div class="card"><svg viewBox="0 0 34 34"><path d="M17 27c-6-4-9-8-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 4-3 8-9 12z"/></svg><h3>화환 안내</h3><p>축하 화환은 감사한 마음으로 받겠습니다.<br>호텔 나루 서울 엠갤러리 앰배서더 2층 나루볼룸홀로 보내주세요.</p></div>
     </div>
   </section>
@@ -560,11 +579,10 @@ footer.end{position:relative;padding:96px 20px 34px;color:var(--ink)}
   <div class="bleed ending rv"><div class="ph" id="endPh"></div><div class="slot">ENDING PHOTO</div><div class="scrim"></div>
     <div class="msg"><p>잘 살겠습니다</p><p>Junkyu &amp; Hyojeong</p></div></div>
 
-  <p class="strip">Our next chapter</p>
   <footer class="end">
     <div class="kl"><button data-kakao aria-label="카카오톡으로 공유"><svg viewBox="0 0 24 24" class="i"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/></svg>KAKAO</button><button data-share aria-label="링크 복사">LINK</button></div>
     <button class="totop" id="toTop" aria-label="맨 위로"><svg viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg></button>
-    <p class="sign">Junkyu &amp; Hyojeong</p>
+    <p class="sign">Junkyu <i>&amp;</i> Hyojeong</p>
   </footer>
 </main>
 
@@ -652,8 +670,8 @@ const CONFIG = {
   photos: { main: 'photos/w13.jpg', mid1: 'photos/w09.jpg', mid2: 'photos/w03.jpg', ending: 'photos/w20.jpg' },
   gallery: ["photos/w01.jpg","photos/w02.jpg","photos/w03.jpg","photos/w04.jpg","photos/w05.jpg","photos/w06.jpg","photos/w07.jpg","photos/w08.jpg","photos/w09.jpg","photos/w10.jpg","photos/w11.jpg","photos/w12.jpg","photos/w13.jpg","photos/w14.jpg","photos/w15.jpg","photos/w16.jpg","photos/w17.jpg","photos/w18.jpg","photos/w19.jpg","photos/w20.jpg","photos/w21.jpg","photos/w22.jpg","photos/w23.jpg","photos/w24.jpg","photos/w25.jpg","photos/w26.jpg","photos/w27.jpg","photos/w28.jpg"],              // 예: ['photos/g01.jpg', 'photos/g02.jpg', ...]
   galleryPlaceholders: 10,
-  photoZoom: false,        // 사진을 눌러 크게 보기 (false: 확대 창 없음)
-  galleryFirst: 6,          // 처음에 보여줄 사진 수 (나머지는 '더 보기')
+  photoZoom: true,         // 사진을 눌러 크게 보기 (false: 확대 창 없음)
+  galleryFirst: 9,          // 처음에 보여줄 사진 수 (나머지는 '더 보기')
   petals: false,            // 화면에 꽃잎 날리기 (켜면 저사양 폰·카톡 브라우저에서 스크롤이 무거워져요)
   music: '',                // 배경음악 파일. 예: 'music/song.mp3' (비워두면 버튼이 숨어요)
   // 하객별 링크: 주소 뒤에 ?to=이모님  또는 코드 ?g=imo / #g-imo
@@ -1130,17 +1148,12 @@ if ('IntersectionObserver' in window && !still) {
 <script>
 (() => {
   const $id = i => document.getElementById(i);
-  $id('skipIntro').click(); // 봉투 없이 바로 첫 화면
   const guide = {"car":"내비게이션에 '호텔 나루 서울 엠갤러리' 또는 '서울 마포구 마포대로 8'을 입력하세요.<br>호텔 무료 발렛을 지원해요 (주차 도장 제공)","sub":"<span class=\"dot\" style=\"background:#996CAC\"></span>5호선 <b>마포역 4번 출구</b>에서 걸어서 3분","bus":"'마포역' 중앙차로 하차<br>160 · 260 · 261 · 463 · 600 · 7016 · M6751"};
   document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
     document.querySelectorAll('.tabs button').forEach(x => x.setAttribute('aria-selected', x === b));
     $id('tabP').innerHTML = guide[b.dataset.tab];
   });
-  const tiles = [...document.querySelectorAll('#grid .tile')]; let cur = 0;
-  const show = i => { cur = (i + tiles.length) % tiles.length; tiles.forEach((t, j) => t.classList.toggle('cur', j === cur)); $id('iosTime').textContent = (cur + 1) + ' / ' + tiles.length; };
-  if (tiles.length) show(0);
-  $id('iosPrev').onclick = () => show(cur - 1); $id('iosNext').onclick = () => show(cur + 1);
-  const isPhoto = el => el && el.closest && el.closest('#heroMedia,.ios,.bleed');
+  const isPhoto = el => el && el.closest && el.closest('#heroMedia,.ios,.bleed,#gallery,#lb');
   addEventListener('contextmenu', e => { if (isPhoto(e.target)) e.preventDefault(); });
   addEventListener('dragstart', e => { if (isPhoto(e.target)) e.preventDefault(); });
   addEventListener('gesturestart', e => { if (isPhoto(e.target)) e.preventDefault(); }, { passive: false }); // 아이폰 두 손가락 확대
