@@ -280,20 +280,31 @@ body{line-height:1.8}
 .book,.sheet,.sketch-full{background:#F0EFEC url(paper.jpg) 0 0/900px 900px}
 .book{padding-bottom:40px;box-shadow:none}
 #petals,.quick,#shareBtn{display:none!important}
-#intro{background:#F0EFEC url(paper.jpg) 0 0/900px 900px;gap:30px}
-.env{width:min(82vw,340px)}
-.env-back{background:#E4DFD6;border-radius:4px;box-shadow:0 22px 44px -20px rgba(60,48,36,.45)}
-.letter{background:#FBFAF7;border-radius:2px;box-shadow:0 1px 3px rgba(60,48,36,.12);gap:6px}
-.letter{z-index:1}.env-front{z-index:2}.flap{z-index:3}.seal{z-index:4}.env.open .flap{z-index:0}
-.letter>*{opacity:0;transition:opacity .5s ease .7s}.env.open .letter>*{opacity:1}
-.letter b{font:400 .72em Montserrat,sans-serif;letter-spacing:.32em;color:#8A847B}
-.letter span{font:500 1.45em/1.2 var(--name);font-style:normal;color:#262626}
-.env-front{background:linear-gradient(180deg,#EDE9E2,#E7E2D9);border-radius:4px;padding-bottom:10%}
-.env-front p{font:400 1em var(--body);color:#4B4946;letter-spacing:.04em}
-.flap{background:linear-gradient(180deg,#E9E5DD,#DDD7CC);border-radius:4px 4px 0 0;filter:drop-shadow(0 2px 2px rgba(60,48,36,.15))}
-.seal{width:50px;height:50px;margin:-25px 0 0 -25px;background:radial-gradient(circle at 35% 30%,#9A2635,#6B0E1A 58%,#520912);font:italic 500 17px var(--name);letter-spacing:.02em;box-shadow:0 2px 5px rgba(60,10,16,.35),inset 0 0 0 3px rgba(255,255,255,.08)}
-#intro .hint{font:400 .92em var(--body);color:#77736C}
-#intro .skip{font:400 .82em var(--body);color:#8A847B}
+/* 레이스 편지봉투 (그림은 tools/envelope_art.html 에서 직접 그린 env/*.webp) */
+#intro{background:#F4EDE8 url(paper.jpg) 0 0/900px 900px;background-blend-mode:multiply;gap:22px}
+#intro .env{width:min(86vw,370px);aspect-ratio:900/634;perspective:1100px;background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#intro .env>*{position:absolute;display:block}
+.e-shadow{left:2%;right:2%;top:6%;bottom:0;border-radius:10px;box-shadow:0 26px 38px -16px rgba(110,55,50,.42),0 4px 10px rgba(110,55,50,.12)}
+.e-back,.e-pocket{left:0;top:0;width:100%;height:100%}
+.e-back{z-index:0;border-radius:3px}
+.e-pocket{z-index:2;pointer-events:none}
+#intro .letter{left:6%;right:6%;top:5%;height:86%;z-index:1;border-radius:2px;background:linear-gradient(160deg,#FFFDF9,#F7F1EA);box-shadow:0 1px 4px rgba(90,50,45,.18),inset 0 0 0 6px #FFFDF9,inset 0 0 0 7px rgba(200,160,150,.35);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:9%;gap:8px;transition:transform 1s cubic-bezier(.2,.75,.25,1) 1.25s}
+#intro .env.open .letter{transform:translateY(-50%)}
+#intro .letter b{font:400 10px Montserrat,sans-serif;letter-spacing:.34em;color:#9A8F86}
+#intro .letter span{font:500 26px/1.15 var(--name);color:#2A2624}
+#intro .letter i{display:block;width:34px;border-top:1px solid rgba(150,110,100,.45);margin-top:4px}
+.e-flap{left:0;top:0;width:100%;z-index:3;transform-origin:50% 0;transform-style:preserve-3d;transition:transform .95s cubic-bezier(.5,.05,.3,1) .35s,z-index 0s .82s}
+.e-flap img{position:absolute;left:0;top:0;width:100%;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.e-flap .f-in{transform:rotateX(180deg)}
+.e-flap .f-front{position:relative}
+#intro .env.open .e-flap{transform:rotateX(180deg);z-index:0}
+#intro .e-seal{left:50%;top:55%;width:19%;margin:0;z-index:4;transform:translate(-50%,-50%);transition:transform .5s cubic-bezier(.4,0,.6,1),opacity .45s ease .05s;pointer-events:none}
+#intro .env.open .e-seal{transform:translate(-50%,-38%) scale(.9) rotate(-8deg);opacity:0}
+#intro .env:not(.open) .e-seal{animation:sealPulse 2.6s ease-in-out 1.2s infinite}
+@keyframes sealPulse{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,-50%) scale(1.045)}}
+#intro .to{font:400 1.02em var(--body);color:#5E5450;letter-spacing:.05em;margin-top:14px}
+#intro .hint{font:400 .86em var(--body);color:#8E8580;margin-top:-10px}
+#intro .skip{font:400 .8em var(--body);color:#9A918C}
 .inner{padding-left:20px;padding-right:20px}
 .tools{top:calc(env(safe-area-inset-top,0px) + 8px);right:10px}.tools button{-webkit-backdrop-filter:none;backdrop-filter:none;width:38px;height:38px;border:1px solid rgba(38,38,38,.14);background:rgba(245,244,241,.7);font-size:15px}
 section{padding-block:128px 0}
@@ -407,12 +418,14 @@ footer.end{position:relative;padding:150px 20px 34px;color:var(--ink)}
 
 <div id="intro">
   <button class="env" id="env" aria-label="청첩장 열기">
-    <div class="env-back"></div>
-    <div class="letter"><b>2027 · 03 · 20</b><span>Junkyu &amp; Hyojeong</span></div>
-    <div class="env-front"><p id="toName">소중한 분께</p></div>
-    <div class="flap"></div>
-    <span class="seal">J&amp;H</span>
+    <span class="e-shadow"></span>
+    <img class="e-back" src="env/back.webp" alt="">
+    <div class="letter"><b>2027 · 03 · 20</b><span>Junkyu <em style="font-style:italic;font-weight:400">&amp;</em> Hyojeong</span><i></i></div>
+    <img class="e-pocket" src="env/pocket.webp" alt="">
+    <div class="e-flap"><img class="f-front" src="env/flap.webp" alt=""><img class="f-in" src="env/flap_in.webp" alt=""></div>
+    <img class="e-seal" src="env/seal.webp" alt="">
   </button>
+  <p class="to" id="toName">소중한 분께</p>
   <p class="hint">봉투를 눌러 열어보세요</p>
   <button class="skip" id="skipIntro">바로 보기</button>
 </div>
@@ -797,8 +810,8 @@ if (guestName) {
   function open() {
     if (done) return; done = true;
     env.classList.add('open');
-    setTimeout(() => intro.classList.add('gone'), still ? 0 : 1700);
-    setTimeout(after, still ? 300 : 2500);
+    setTimeout(() => intro.classList.add('gone'), still ? 0 : 2750);
+    setTimeout(after, still ? 300 : 3450);
   }
   env.onclick = open;
   $('#skipIntro').onclick = () => { done = true; after(); };
