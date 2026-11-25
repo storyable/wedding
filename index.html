@@ -275,11 +275,11 @@ footer{text-align:center;color:var(--muted);font-size:.8em;padding-top:56px}
   --display:'Gowun Batang',serif;--body:'Gowun Batang',serif;--latin:'PT Serif',Georgia,serif;--script:'Mrs Saint Delafield',cursive}
 html.large{--fs:19px}
 body{line-height:1.8}
-.book,.sheet,.sketch-full{background:#F0EFEC url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iOTAwIj48ZmlsdGVyIGlkPSJwIiB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjAyMiAuMDM2IiBudW1PY3RhdmVzPSI0IiBzZWVkPSIyMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjxmZURpZmZ1c2VMaWdodGluZyBsaWdodGluZy1jb2xvcj0iI2ZmZiIgc3VyZmFjZVNjYWxlPSIxLjciIGRpZmZ1c2VDb25zdGFudD0iMS4wMiI+PGZlRGlzdGFudExpZ2h0IGF6aW11dGg9IjM4IiBlbGV2YXRpb249IjY0Ii8+PC9mZURpZmZ1c2VMaWdodGluZz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjkwMCIgZmlsdGVyPSJ1cmwoI3ApIi8+PC9zdmc+") 0 0/900px 900px}
+.book,.sheet,.sketch-full{background:#F0EFEC url(paper.jpg) 0 0/900px 900px}
 .book{padding-bottom:40px;box-shadow:none}
 #intro,#petals,.quick,#shareBtn{display:none!important}
 .inner{padding-left:20px;padding-right:20px}
-.tools{top:calc(env(safe-area-inset-top,0px) + 8px);right:10px}.tools button{width:38px;height:38px;border:1px solid rgba(38,38,38,.14);background:rgba(245,244,241,.7);font-size:15px}
+.tools{top:calc(env(safe-area-inset-top,0px) + 8px);right:10px}.tools button{-webkit-backdrop-filter:none;backdrop-filter:none;width:38px;height:38px;border:1px solid rgba(38,38,38,.14);background:rgba(245,244,241,.7);font-size:15px}
 section{padding-block:128px 0}
 .sec-title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 .sec-sub{font:700 1em/1.4 var(--body);color:#000;letter-spacing:0;margin:0 0 46px}
@@ -292,7 +292,7 @@ section{padding-block:128px 0}
 .s-card{fill:#fff;stroke:rgba(38,38,38,.3);stroke-width:1}
 .hero.bleed{background:none}
 .hero{aspect-ratio:auto;overflow:visible;min-height:100svh;display:flex;flex-direction:column;align-items:center;padding:0}
-.heart{position:relative;width:min(75%,340px);margin-top:calc(29svh - 60px)}
+.heart{position:relative;transform:translateZ(0);width:min(75%,340px);margin-top:calc(29svh - 60px)}
 #heroMedia img{inset:auto;left:-24.68%;top:-43.57%;width:135.06%;height:auto;max-width:none;object-fit:fill}
 #heroMedia{position:relative;z-index:1;aspect-ratio:100/81.35;clip-path:url(#heartClip);background:#D7D3CB;overflow:hidden}
 .lace{position:absolute;display:block;height:auto;overflow:visible;pointer-events:none;filter:drop-shadow(0 .5px 1px rgba(60,50,40,.3))}
@@ -314,12 +314,16 @@ section{padding-block:128px 0}
 .abox{text-align:left}.abox p{margin-top:14px;position:relative}
 .i{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5}
 .copy{position:absolute;right:4px;top:0;border:0;background:none;padding:2px;line-height:0}
-#navApps{display:flex;gap:0;margin:0;letter-spacing:.78px;white-space:nowrap}
-#navApps a{display:inline;border:0;background:none;padding:0;border-radius:0;font-size:1em;color:var(--ink)}
-#navApps a i{display:none}#navApps a+a::before{content:'\00a0·\00a0'}
 .mapwrap{margin-top:15px;border:0;border-radius:0}
 .map-actions{display:flex;justify-content:center;gap:8px;margin-top:14px}.map-actions .btn{font-size:1em;border-radius:999px;background:rgba(255,255,255,.26);color:#4B4946;border-color:rgba(38,38,38,.17)}
-.route-box{background:var(--tint)}.modes button{border-radius:999px}
+.route-box{background:var(--tint)}
+.ap{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;flex:none;font-style:normal}
+.ap svg{width:18px;height:18px}
+.ap-line{background:none!important;color:#5B5853}.ap-line svg{width:17px;height:17px}
+.nav-apps,.sketch-full .nav-apps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.nav-apps a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:74px;padding:0;border:1px solid rgba(38,38,38,.12);border-radius:14px;background:rgba(255,255,255,.62);color:var(--ink);font-size:.82em;letter-spacing:0;text-decoration:none;box-shadow:0 1px 2px rgba(60,50,40,.05)}
+.nav-apps a .ap{width:30px;height:30px;border-radius:9px}.nav-apps a .ap svg{width:22px;height:22px}
+.nav-apps a:active,.acct-actions .btn:active{transform:scale(.97);background:rgba(255,255,255,.9)}.modes button{border-radius:999px}
 .tabs{display:flex;gap:30px;margin-top:15px}
 .tabs button{background:none;border:0;border-bottom:1px solid rgba(38,38,38,.16);padding:0 2px 5px;color:rgba(38,38,38,.42);font:400 1em var(--body)}
 .tabs button[aria-selected="true"]{color:var(--ink);font-weight:700;border-bottom-color:var(--ink)}
@@ -331,7 +335,12 @@ section{padding-block:128px 0}
 .count div{background:none;min-width:52px}.count b{font-size:1.4em}.dday b{font-size:1.15em;color:var(--blossom)}
 .cards{gap:0}.card{background:none;border-top:1px solid rgba(38,38,38,.16);border-radius:0;padding:18px 2px}.card h3{font-weight:700}.card svg{width:26px;height:26px;stroke-width:1.1}
 details.acc{background:none;border:0;border-top:1px solid rgba(38,38,38,.16);border-radius:0;margin:0}details.acc:last-child{border-bottom:1px solid rgba(38,38,38,.16)}
-details.acc summary{padding:15px 2px}.acct{background:var(--tint)}
+details.acc summary{padding:15px 2px}
+.acct{display:grid;grid-template-columns:1fr;gap:12px;padding:16px 16px 18px;background:var(--tint)}
+.acct .num{font-size:1em;letter-spacing:.02em}
+.acct-actions{max-width:none;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px;justify-content:stretch}
+.acct-actions .btn,.acct .btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 10px;border-radius:12px;font-size:.88em;background:rgba(255,255,255,.75)!important;border:1px solid rgba(38,38,38,.13)!important;color:var(--ink)!important}
+.acct-actions .ap{width:22px;height:22px;border-radius:6px}.acct-actions .ap svg{width:16px;height:16px}
 input[type=text],input[type=number],textarea,select{background:rgba(255,255,255,.55);border-color:rgba(38,38,38,.16)}
 .seg label{background:rgba(255,255,255,.55);border-color:rgba(38,38,38,.16);border-radius:999px}
 .seg input:checked+label{background:#3A3835;border-color:#3A3835;color:#fff}
@@ -416,7 +425,7 @@ footer.end{position:relative;padding:96px 20px 34px;color:var(--ink)}
     <div class="row" style="margin-top:36px"><button class="btn" data-open="contactSheet">신랑 신부에게 연락하기</button></div>
   </section>
 
-  <div class="bleed mid rv" data-parallax><div class="ph" id="mid1"></div><div class="slot">PHOTO</div><p class="cap">Spring, by the river</p></div>
+  <div class="bleed mid rv"><div class="ph" id="mid1"></div><div class="slot">PHOTO</div><p class="cap">Spring, by the river</p></div>
 
   <section id="date" class="inner rv">
     <h2 class="sec-title"><em>Wedding Day</em></h2>
@@ -454,7 +463,7 @@ footer.end{position:relative;padding:96px 20px 34px;color:var(--ink)}
       <p>서울 마포구 마포대로 8<button class="copy" data-copy="서울 마포구 마포대로 8" data-done="주소를 복사했어요" aria-label="주소 복사"><svg viewBox="0 0 24 24" class="i"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></button></p>
       <p>앰배서더 2층 나루볼룸홀</p>
     </div>
-    <div class="lbl"><b>MAP</b><div class="nav-apps" id="navApps"></div></div>
+    <div class="lbl"><b>MAP</b></div>
     <div class="mapwrap" id="mapwrap">
       <svg class="sketch" viewBox="0 0 600 800" role="img" aria-label="호텔 나루 서울 엠갤러리 약도. 마포역 4번 출구에서 마포대로를 따라 한강 방향으로 걸어서 약 3분, 마포대로 동쪽 강변북로 앞">
 <rect width="600" height="800" class="s-ground"/>
@@ -485,6 +494,7 @@ footer.end{position:relative;padding:96px 20px 34px;color:var(--ink)}
       <div id="livemap" aria-label="호텔 나루 위치 지도"></div>
     </div>
     
+    <div class="nav-apps" id="navApps"></div>
     <div class="map-actions">
       <button class="btn solid" id="routeBtn">내 위치에서 길찾기</button>
       <button class="btn" id="sketchBtn">약도 보기</button>
@@ -504,7 +514,7 @@ footer.end{position:relative;padding:96px 20px 34px;color:var(--ink)}
     <div class="tab-p" id="tabP">내비게이션에 '호텔 나루 서울 엠갤러리' 또는 '서울 마포구 마포대로 8'을 입력하세요.<br>호텔 무료 발렛을 지원해요 (주차 도장 제공)</div>
   </section>
 
-  <div class="bleed mid rv" data-parallax><div class="ph" id="mid2"></div><div class="slot">PHOTO</div><p class="cap">Our next chapter</p></div>
+  <div class="bleed mid rv"><div class="ph" id="mid2"></div><div class="slot">PHOTO</div><p class="cap">Our next chapter</p></div>
 
   <section id="info" class="inner rv">
     <h2 class="sec-title"><em>Information</em></h2>
@@ -637,6 +647,7 @@ const CONFIG = {
   gallery: ["photos/w01.jpg","photos/w02.jpg","photos/w03.jpg","photos/w04.jpg","photos/w05.jpg","photos/w06.jpg","photos/w07.jpg","photos/w08.jpg","photos/w09.jpg","photos/w10.jpg","photos/w11.jpg","photos/w12.jpg","photos/w13.jpg","photos/w14.jpg","photos/w15.jpg","photos/w16.jpg","photos/w17.jpg","photos/w18.jpg","photos/w19.jpg","photos/w20.jpg","photos/w21.jpg","photos/w22.jpg","photos/w23.jpg","photos/w24.jpg","photos/w25.jpg","photos/w26.jpg","photos/w27.jpg","photos/w28.jpg"],              // 예: ['photos/g01.jpg', 'photos/g02.jpg', ...]
   galleryPlaceholders: 10,
   galleryFirst: 6,          // 처음에 보여줄 사진 수 (나머지는 '더 보기')
+  petals: false,            // 화면에 꽃잎 날리기 (켜면 저사양 폰·카톡 브라우저에서 스크롤이 무거워져요)
   music: '',                // 배경음악 파일. 예: 'music/song.mp3' (비워두면 버튼이 숨어요)
   // 하객별 링크: 주소 뒤에 ?to=이모님  또는 코드 ?g=imo / #g-imo
   guests: { imo: '이모님', samchon: '삼촌' },
@@ -838,14 +849,24 @@ $('#contacts').innerHTML = CONFIG.contacts.map(c => {
     <div class="row"><a class="btn" href="tel:${tel}">전화</a><a class="btn" href="sms:${tel}">문자</a></div></div>`;
 }).join('');
 
+// 앱 버튼용 작은 아이콘 (직접 그린 단순한 글리프)
+const MARKS = {
+  naver: '<svg viewBox="0 0 24 24"><path fill="#fff" d="M7 6h3.6l3.8 5.7V6H18v12h-3.6l-3.8-5.7V18H7z"/></svg>',
+  kakao: '<svg viewBox="0 0 24 24"><path fill="#3A1D1D" d="M12 4.5A5.5 5.5 0 0 0 6.5 10c0 4.1 5.5 9.5 5.5 9.5s5.5-5.4 5.5-9.5A5.5 5.5 0 0 0 12 4.5zm0 7.6a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2z"/></svg>',
+  tmap: '<svg viewBox="0 0 24 24"><path fill="#fff" d="M6.5 6.5h11v3h-4v8h-3v-8h-4z"/></svg>',
+  toss: '<svg viewBox="0 0 24 24"><path fill="#fff" d="M10.2 5.5h2.9v3h3v2.6h-3v4.1c0 .9.4 1.2 1.2 1.2h1.8v2.7h-2.4c-2.4 0-3.5-1.2-3.5-3.5v-4.5H8.3V8.5h1.9z"/></svg>',
+  kakaopay: '<svg viewBox="0 0 24 24"><path fill="#3A1D1D" d="M12 5C7.6 5 4 7.8 4 11.2c0 2.2 1.5 4.1 3.7 5.2l-.9 3.3 3.8-2.5c.5.1.9.1 1.4.1 4.4 0 8-2.8 8-6.1S16.4 5 12 5z"/></svg>',
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>',
+};
+
 // 계좌 + 간편 송금
 const isPlaceholder = n => !/[1-9]/.test(n);
 const tossLink = a => 'supertoss://send?bank=' + encodeURIComponent(a.bank.replace(/은행$/, '')) + '&accountNo=' + a.number.replace(/[^0-9]/g, '') + '&origin=qr';
 $('#accounts').innerHTML = Object.entries(CONFIG.accounts).map(([side, list]) => `<details class="acc"><summary>${esc(side)} 계좌번호</summary>${list.map(a =>
   `<div class="acct"><div><div class="who">${esc(a.who)}</div><div class="num">${esc(a.bank)} ${esc(a.number)}</div></div>
-   <div class="acct-actions"><button class="btn" data-copy="${esc(a.bank + ' ' + a.number)}" data-done="계좌번호를 복사했어요">복사</button>
-   ${a.kakaopay ? `<a class="btn pay-kakao" href="${esc(a.kakaopay)}" target="_blank" rel="noopener">카카오페이</a>` : ''}
-   <a class="btn pay-toss" href="${isPlaceholder(a.number) ? '#' : esc(tossLink(a))}" data-pay="${isPlaceholder(a.number) ? 'empty' : 'toss'}">토스</a></div></div>`).join('')}</details>`).join('');
+   <div class="acct-actions"><button class="btn" data-copy="${esc(a.bank + ' ' + a.number)}" data-done="계좌번호를 복사했어요"><i class="ap ap-line">${MARKS.copy}</i><span>계좌 복사</span></button>
+   ${a.kakaopay ? `<a class="btn pay-kakao" href="${esc(a.kakaopay)}" target="_blank" rel="noopener"><i class="ap" style="background:#FFEB00">${MARKS.kakaopay}</i><span>카카오페이</span></a>` : ''}
+   ${isPlaceholder(a.number) ? '' : `<a class="btn pay-toss" href="${esc(tossLink(a))}" data-pay="toss"><i class="ap" style="background:#0064FF">${MARKS.toss}</i><span>토스로 보내기</span></a>`}</div></div>`).join('')}</details>`).join('');
 document.addEventListener('click', e => {
   const p = e.target.closest('[data-pay]'); if (!p) return;
   if (p.dataset.pay === 'empty') { e.preventDefault(); toast('계좌번호를 넣으면 토스로 바로 보낼 수 있어요'); return; }
@@ -856,11 +877,11 @@ document.addEventListener('click', e => {
 (function () {
   const { venue: n, lat, lng } = CONFIG, en = encodeURIComponent(n), host = encodeURIComponent(location.hostname || 'invitation');
   const apps = [
-    { name: '네이버지도', color: '#03C75A', href: `nmap://route/public?dlat=${lat}&dlng=${lng}&dname=${en}&appname=${host}`, web: `https://map.naver.com/p/search/${en}` },
-    { name: '티맵', color: '#EF3F55', href: `tmap://route?goalname=${en}&goalx=${lng}&goaly=${lat}` },
-    { name: '카카오맵', color: '#FFCD00', href: `https://map.kakao.com/link/to/${en},${lat},${lng}` },
+    { name: '네이버지도', color: '#03C75A', mark: MARKS.naver, href: `nmap://route/public?dlat=${lat}&dlng=${lng}&dname=${en}&appname=${host}`, web: `https://map.naver.com/p/search/${en}` },
+    { name: '카카오맵', color: '#FFCD00', mark: MARKS.kakao, href: `https://map.kakao.com/link/to/${en},${lat},${lng}` },
+    { name: '티맵', color: 'linear-gradient(135deg,#FF4E6A,#7A4DFF)', mark: MARKS.tmap, href: `tmap://route?goalname=${en}&goalx=${lng}&goaly=${lat}` },
   ];
-  $('#navApps').innerHTML = apps.map((a, i) => `<a href="${a.href}" data-nav="${i}"${a.href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}><i style="background:${a.color}"></i>${a.name}</a>`).join('');
+  $('#navApps').innerHTML = apps.map((a, i) => `<a href="${a.href}" data-nav="${i}"${a.href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}><i class="ap" style="background:${a.color}">${a.mark}</i><span>${a.name}</span></a>`).join('');
   $('#navApps').addEventListener('click', e => {
     const el = e.target.closest('[data-nav]'); if (!el) return;
     const a = apps[+el.dataset.nav]; if (a.href.startsWith('http')) return;
@@ -1030,7 +1051,7 @@ if ('IntersectionObserver' in window && !still) {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
   $$('.rv').forEach(el => io.observe(el));
   const bands = [...$$('[data-parallax] .ph')];
-  addEventListener('scroll', () => requestAnimationFrame(() => bands.forEach(b => {
+  if (bands.length) addEventListener('scroll', () => requestAnimationFrame(() => bands.forEach(b => {
     const r = b.parentElement.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
     b.style.transform = `translateY(${((r.top + r.height / 2 - innerHeight / 2) / innerHeight) * -6}%)`;
   })), { passive: true });
@@ -1062,7 +1083,7 @@ if ('IntersectionObserver' in window && !still) {
 // 봄 꽃잎
 (function () {
   const c = $('#petals');
-  if (still) { c.hidden = true; return; }
+  if (still || !CONFIG.petals) { c.hidden = true; return; } // 꺼 두면 그리기 루프 자체를 안 돌려요 (카톡 브라우저 스크롤 버벅임 방지)
   const ctx = c.getContext('2d'), dpr = Math.min(devicePixelRatio || 1, 2);
   let W, H, wind = 0, lastY = scrollY;
   const size = () => { W = c.width = innerWidth * dpr; H = c.height = innerHeight * dpr; };
