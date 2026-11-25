@@ -681,6 +681,7 @@ const CONFIG = {
   gallery: ["photos/w01.jpg","photos/w02.jpg","photos/w03.jpg","photos/w04.jpg","photos/w05.jpg","photos/w06.jpg","photos/w07.jpg","photos/w08.jpg","photos/w09.jpg","photos/w10.jpg","photos/w11.jpg","photos/w12.jpg","photos/w13.jpg","photos/w14.jpg","photos/w15.jpg","photos/w16.jpg","photos/w17.jpg","photos/w18.jpg","photos/w19.jpg","photos/w20.jpg","photos/w21.jpg","photos/w22.jpg","photos/w23.jpg","photos/w24.jpg","photos/w25.jpg","photos/w26.jpg","photos/w27.jpg","photos/w28.jpg"],              // 예: ['photos/g01.jpg', 'photos/g02.jpg', ...]
   galleryPlaceholders: 10,
   photoZoom: true,         // 사진을 눌러 크게 보기 (false: 확대 창 없음)
+  galleryShuffle: true,    // 열 때마다 사진 순서를 무작위로
   galleryFirst: 9,          // 처음에 보여줄 사진 수 (나머지는 '더 보기')
   petals: false,            // 화면에 꽃잎 날리기 (켜면 저사양 폰·카톡 브라우저에서 스크롤이 무거워져요)
   music: '',                // 배경음악 파일. 예: 'music/song.mp3' (비워두면 버튼이 숨어요)
@@ -853,7 +854,8 @@ function fillBand(id, src, i) {
 fillBand('mid1', CONFIG.photos.mid1, 2); fillBand('mid2', CONFIG.photos.mid2, 1); fillBand('endPh', CONFIG.photos.ending, 5);
 if (CONFIG.photos.main) $('#heroMedia').innerHTML = `<img src="${esc(CONFIG.photos.main)}" alt="장준규와 임효정">`;
 
-const photos = CONFIG.gallery.length ? CONFIG.gallery : Array.from({ length: CONFIG.galleryPlaceholders }, () => '');
+const photos = CONFIG.gallery.length ? CONFIG.gallery.slice() : Array.from({ length: CONFIG.galleryPlaceholders }, () => '');
+if (CONFIG.galleryShuffle) for (let i = photos.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [photos[i], photos[j]] = [photos[j], photos[i]]; }
 $('#grid').innerHTML = photos.map((src, i) => `<button class="tile${i >= CONFIG.galleryFirst ? ' more-hidden' : ''}" data-i="${i}" aria-label="사진 ${i + 1} 크게 보기" style="background:${wash(i)}">${src ? `<img src="${esc(src)}" alt="" loading="lazy">` : `<span>PHOTO ${String(i + 1).padStart(2, '0')}</span>`}</button>`).join('');
 if (photos.length > CONFIG.galleryFirst) { $('#moreBtn').hidden = false; $('#moreBtn').onclick = e => { $$('.tile.more-hidden').forEach(t => t.classList.remove('more-hidden')); e.target.hidden = true; }; }
 
@@ -1163,6 +1165,8 @@ if ('IntersectionObserver' in window && !still) {
     document.querySelectorAll('.tabs button').forEach(x => x.setAttribute('aria-selected', x === b));
     $id('tabP').innerHTML = guide[b.dataset.tab];
   });
+  const CROP = {"w01.jpg":"50% 0%","w02.jpg":"50% 0%","w03.jpg":"50% 40%","w04.jpg":"50% 50%","w05.jpg":"30% 50%","w06.jpg":"55% 20%","w07.jpg":"50% 0%","w08.jpg":"50% 15%","w09.jpg":"50% 0%","w10.jpg":"50% 40%","w11.jpg":"50% 40%","w12.jpg":"50% 15%","w13.jpg":"50% 25%","w14.jpg":"50% 0%","w15.jpg":"50% 20%","w16.jpg":"50% 20%","w17.jpg":"50% 10%","w18.jpg":"50% 70%","w19.jpg":"50% 10%","w20.jpg":"50% 15%","w21.jpg":"50% 15%","w22.jpg":"50% 30%","w23.jpg":"50% 25%","w24.jpg":"50% 0%","w25.jpg":"50% 35%","w26.jpg":"50% 20%","w27.jpg":"50% 20%","w28.jpg":"50% 55%"};
+  document.querySelectorAll('#gallery .tile img').forEach(im => { const p = CROP[im.getAttribute('src').split('/').pop()]; if (p) im.style.objectPosition = p; });
   const tiles = [...document.querySelectorAll('#gallery .tile')], PER = 9, pages = Math.ceil(tiles.length / PER);
   if (pages > 1) {
     const pager = document.createElement('nav'); pager.className = 'pager'; pager.setAttribute('aria-label', '사진 페이지');
